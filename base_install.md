@@ -183,3 +183,17 @@ your basic Arch Linux install is finished you can now reboot your system
 exit
 reboot
 ``` 
+## Add User (Optional)
+after restarting your system you can add a user
+
+first edit the sudosers file with `EDITOR=nano visudo` and uncomment `%wheel ALL=(ALL) NOPASSWD: ALL`
+
+then add the user replace `bitcubix` with your username
+```bash
+useradd --create-home --groups wheel,video bitcubix
+```
+then you can set a password for your user again replace `bitcubix` with your username
+```bash
+passwd bitcubix
+```
+to login run `exit` then you can login with your new user
