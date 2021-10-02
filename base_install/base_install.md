@@ -1,5 +1,11 @@
 # Basic Arch Linux Install
-This repo contains everthing needs to install Arch Linux.
+This folder contains everthing you need for a basic Arch Linux installation.
+
+## Scripts
+If you want to keep it simple (you little sucker) you can use the script:
+
+[create boot stick script](create_boot_stick.sh)
+
 ## Create Bootable Stick
 > stick has path `/dev/sdc` in this tutorial
 
