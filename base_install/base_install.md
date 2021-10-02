@@ -6,6 +6,19 @@ If you want to keep it simple (you little sucker) you can use the script:
 
 [create boot stick script](create_boot_stick.sh)
 
+For the base install script clone the whole repo because you need multiple file.
+```bash
+pacman -Sy
+pacman -S git
+git clone https://github.com/bitcubix/arch
+```
+
+To run the script:
+```bash
+cd arch
+bash base_install.sh
+```
+
 ## Create Bootable Stick
 > stick has path `/dev/sdc` in this tutorial
 
