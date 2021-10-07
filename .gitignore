@@ -1,0 +1,32 @@
+# general
+.history/
+
+# executables
+*.jar
+*.exe
+*.msi
+
+# archives
+*.tar
+*.tar.*
+*.zip
+*.tgz
+
+# logs
+*.log
+*.log.*
+
+# linux unused files
+.Trash-*
+.nfs*
+
+# macos unused files
+.DS_Store
+
+# vscode
+.vscode/*
+*.code-workspace
+
+# vim
+Session.vim
+Sessionx.vim
