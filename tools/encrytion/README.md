@@ -1,4 +1,4 @@
-# Encyption Scripts
+# Encryption Scripts
 
 This folder contains script to encrypt partitions or devices.
 
