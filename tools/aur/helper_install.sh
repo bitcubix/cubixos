@@ -24,6 +24,11 @@ git clone https://aur.archlinux.org/yay.git /tmp/yay
 cd /tmp/yay
 su ${USER} -c "makepkg -si"
 
+# create backup of mirrorlist
+if test -f "/etc/pacman.d/mirrorlist"; then
+    cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.$(date "+%Y-%m-%d_%H-%M-%S")
+fi
+
 # write reflector config file
 cat <<EOF > /etc/xdg/reflector/reflector.conf
 --save /etc/pacman.d/mirrorlist
