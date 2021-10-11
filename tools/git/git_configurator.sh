@@ -86,13 +86,21 @@ then
 	else
 		ssh-keygen -t ed25519 -C $ssh_mail
 	fi
-
-	# Starting the SSH-agent in background
-	eval "$(ssh-agent -s)"
-
 	tput setaf 2
 	echo 
 	echo "##### SSH key pair generated successfully ####"
+	echo 
+	tput sgr0
+
+	# Starting the SSH-agent in background
+	tput setaf 3
+	echo "############# Starting the SSH-agent in background #############"
+	echo 
+	tput sgr0
+	eval "$(ssh-agent -s)"
+	tput setaf 2
+	echo 
+	echo "##### SSH-agent started successfully ####"
 	echo 
 	tput sgr0
 
@@ -130,6 +138,44 @@ then
 	echo "##### GPG key pair generated successfully ####"
 	echo 
 	tput sgr0
+
+	# Setting GPG key for local git
+	tput setaf 3
+	echo "##### Associating the generated GPG key with your local git #####"
+	echo 
+	tput sgr0
+	gpg --list-secret-keys --keyid-format=long
+	tput setaf 3
+	echo "Given below is the way you identify gpg key"
+	tput setaf 5
+	echo -n "sec   "
+	tput setaf 6
+	echo -n "encoding_format/"
+	tput setaf 2
+	echo -n "key"
+	tput setaf 7
+	echo " date [SC]..."
+	tput sgr0
+	read -p "Paste the key_id to be used with git from above output: " key
+	git config --global user.signingkey $key
+	tput setaf 2
+	echo 
+	echo "##### GPG key is linked with git successfully ####"
+	echo 
+	tput sgr0
+
+	# Signed or unsigned commits
+	read -p "Do you wnat your commits to be signed with your GPG key?[Y/n]: " choice
+	if [ "$choice" == "Y" ] || [ "$choice" == "y" ] || [ "$choice" == "" ]
+	then
+		git config commit.gpgsign true
+		tput setaf 2
+		echo 
+		echo "##### Your git commits will be signed from now on ####"
+		echo 
+		tput sgr0
+	fi
+	
 	tput setaf 1
 	echo
 	echo "visit:" 
