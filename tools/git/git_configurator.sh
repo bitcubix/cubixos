@@ -24,7 +24,11 @@
 # git push --set-upstream origin master
 # git reset --hard orgin/master
 
+# --------------------------------------------------------------------------------------------------------------
 
+# A bit about pacman tags we used
+# --needed : Install packages only if needed
+# --noconfirm : Do not ask for confirmation if there are any packages to be installed
 
 
 # Installing git if its not installed
@@ -59,12 +63,6 @@ git config --global credential.helper 'cache --timeout=32000'
 # Choosing whether to push all or just current branch to the remote repo.
 git config --global push.default simple
 
-# Installing open-ssh if needed
-tput setaf 4
-echo "##################### Installing SSH ###########################"
-echo ""
-sudo pacman -S openssh --needed --noconfirm
-tput sgr0
 
 # Setting ssh key
 tput setaf 3
@@ -74,6 +72,13 @@ tput sgr0
 read -p "Do you want to generate new SSH key pair?[Y/n]: " choice
 if [ "$choice" == "Y" ] || [ "$choice" == "y" ] || [ "$choice" == "" ]
 then
+	# Installing open-ssh if needed
+	tput setaf 4
+	echo "##################### Installing SSH ###########################"
+	echo ""
+	sudo pacman -S openssh --needed --noconfirm
+	tput sgr0
+	
 	read -p "Enter the mail to be used to set up SSH key(Empty to use the same mail id you entered for git): " ssh_mail
 	if [ "$ssh_mail"=="" ]
 	then
@@ -102,12 +107,6 @@ then
 	tput sgr0
 fi
 
-# Installing gpgme if needed
-tput setaf 4
-echo "##################### Installing GPG ###########################"
-echo 
-sudo pacman -S gpgme --needed --noconfirm
-tput sgr0
 
 # Setting GPG key
 tput setaf 3
@@ -117,6 +116,13 @@ tput sgr0
 read -p "Do you want to generate new GPG key pair?[Y/n]: " choice
 if [ "$choice" == "Y" ] || [ "$choice" == "y" ] || [ "$choice" == "" ]
 then
+	# Installing gpgme if needed
+	tput setaf 4
+	echo "##################### Installing GPG ###########################"
+	echo 
+	sudo pacman -S gpgme --needed --noconfirm
+	tput sgr0
+
 	gpg --full-generate-key
 
 	tput setaf 2
