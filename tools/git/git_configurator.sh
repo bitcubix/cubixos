@@ -104,6 +104,23 @@ then
 	echo 
 	tput sgr0
 
+	tput setaf 3
+	echo "############### Adding the key to SSH-agent  ##################"
+	echo 
+	tput sgr0
+	read -p "Enter the path to your ssh key(empty to use default : ~/.ssh/id_ed25519):" path
+	if [ "$path"=="" ]
+	then
+		ssh-add ~/.ssh/id_ed25519
+	else
+		ssh-add $path
+	tput setaf 2
+	echo 
+	echo "##### key added to SSH-agent successfully ####"
+	echo 
+	tput sgr0
+
+
 	tput setaf 1
 	echo
 	echo "visit:"
