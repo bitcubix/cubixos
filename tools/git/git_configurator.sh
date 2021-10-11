@@ -1,4 +1,4 @@
-#!/bin/bash  
+#!/bin/bash
 #
 ##################################################################################################################
 # Written to be used on 64 bits computers
@@ -34,23 +34,23 @@
 # Installing git if its not installed
 tput setaf 4
 echo "##################### Installing git ###########################"
-echo 
+echo
 sudo pacman -S git --needed --noconfirm
 tput sgr0
 
 # Setting mail and name to be associated with local git
 tput setaf 3
 echo "############## Setting up name and email ###################"
-echo 
+echo
 tput sgr0
 read -p "Enter your name: " name
 read -p "Enter your email address: " mail
 git config --global user.name $name
 git config --global user.email $mail
 tput setaf 2
-echo 
+echo
 echo "##### Name and Email set successfully ####"
-echo 
+echo
 tput sgr0
 
 # Setting defult text editor
@@ -67,7 +67,7 @@ git config --global push.default simple
 # Setting ssh key
 tput setaf 3
 echo "###################### Setting up SSH key ######################"
-echo 
+echo
 tput sgr0
 read -p "Do you want to generate new SSH key pair?[Y/n]: " choice
 if [ "$choice" == "Y" ] || [ "$choice" == "y" ] || [ "$choice" == "" ]
@@ -75,49 +75,50 @@ then
 	# Installing open-ssh if needed
 	tput setaf 4
 	echo "##################### Installing SSH ###########################"
-	echo ""
+	echo
 	sudo pacman -S openssh --needed --noconfirm
 	tput sgr0
 	
 	read -p "Enter the mail to be used to set up SSH key(Empty to use the same mail id you entered for git): " ssh_mail
-	if [ "$ssh_mail"=="" ]
+	if [ "$ssh_mail" == "" ]
 	then
 		ssh-keygen -t ed25519 -C $mail
 	else
 		ssh-keygen -t ed25519 -C $ssh_mail
 	fi
 	tput setaf 2
-	echo 
+	echo
 	echo "##### SSH key pair generated successfully ####"
-	echo 
+	echo
 	tput sgr0
 
 	# Starting the SSH-agent in background
 	tput setaf 3
 	echo "############# Starting the SSH-agent in background #############"
-	echo 
+	echo
 	tput sgr0
 	eval "$(ssh-agent -s)"
 	tput setaf 2
-	echo 
+	echo
 	echo "##### SSH-agent started successfully ####"
-	echo 
+	echo
 	tput sgr0
 
 	tput setaf 3
 	echo "############### Adding the key to SSH-agent  ##################"
-	echo 
+	echo
 	tput sgr0
 	read -p "Enter the path to your ssh key(empty to use default : ~/.ssh/id_ed25519):" path
-	if [ "$path"=="" ]
+	if [ "$path" == "" ]
 	then
 		ssh-add ~/.ssh/id_ed25519
 	else
 		ssh-add $path
+	fi
 	tput setaf 2
-	echo 
+	echo
 	echo "##### key added to SSH-agent successfully ####"
-	echo 
+	echo
 	tput sgr0
 
 
@@ -126,7 +127,7 @@ then
 	echo "visit:"
 	echo "1.To add your SSH key to your github account"
 	echo "		https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account"
-	echo 
+	echo
 	echo "2.To add your SSH key to your gitlab account"
 	echo "		https://docs.gitlab.com/ee/ssh/#add-an-ssh-key-to-your-gitlab-account"
 	tput sgr0
@@ -136,7 +137,7 @@ fi
 # Setting GPG key
 tput setaf 3
 echo "###################### Setting up GPG key ######################"
-echo 
+echo
 tput sgr0
 read -p "Do you want to generate new GPG key pair?[Y/n]: " choice
 if [ "$choice" == "Y" ] || [ "$choice" == "y" ] || [ "$choice" == "" ]
@@ -144,22 +145,22 @@ then
 	# Installing gpgme if needed
 	tput setaf 4
 	echo "##################### Installing GPG ###########################"
-	echo 
+	echo
 	sudo pacman -S gpgme --needed --noconfirm
 	tput sgr0
 
 	gpg --full-generate-key
 
 	tput setaf 2
-	echo 
+	echo
 	echo "##### GPG key pair generated successfully ####"
-	echo 
+	echo
 	tput sgr0
 
 	# Setting GPG key for local git
 	tput setaf 3
 	echo "##### Associating the generated GPG key with your local git #####"
-	echo 
+	echo
 	tput sgr0
 	gpg --list-secret-keys --keyid-format=long
 	tput setaf 3
@@ -169,16 +170,16 @@ then
 	tput setaf 6
 	echo -n "encoding_format/"
 	tput setaf 2
-	echo -n "key"
+	echo -n "key_id"
 	tput setaf 7
 	echo " date [SC]..."
 	tput sgr0
 	read -p "Paste the key_id to be used with git from above output: " key
 	git config --global user.signingkey $key
 	tput setaf 2
-	echo 
+	echo
 	echo "##### GPG key is linked with git successfully ####"
-	echo 
+	echo
 	tput sgr0
 
 	# Signed or unsigned commits
@@ -187,9 +188,9 @@ then
 	then
 		git config commit.gpgsign true
 		tput setaf 2
-		echo 
+		echo
 		echo "##### Your git commits will be signed from now on ####"
-		echo 
+		echo
 		tput sgr0
 	fi
 	
@@ -198,7 +199,7 @@ then
 	echo "visit:" 
 	echo "1.To add your GPG key to your github account"
 	echo "		https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-new-gpg-key-to-your-github-account"
-	echo 
+	echo
 	echo "2.To add your GPG key to your gitlab account"
 	echo "		https://docs.gitlab.com/ee/user/project/repository/gpg_signed_commits/#adding-a-gpg-key-to-your-account"
 	tput sgr0
