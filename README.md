@@ -32,7 +32,12 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#about-the-project">About The Project</a></li>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+      <li><a href="#parts">Parts of the Project</a></li>
+      </ul>
+    </li>
     <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -46,6 +51,12 @@
 ## About The Project
 
 This Project is meant to be a collection of useful script and tutorial around archlinux (and in general linux). Its conetent is created by side over time using linux every day.
+
+<!-- parts -->
+### Parts
+
+* [Base Install](base_install/) Basic Arch install script with [tutorial](base_install/base_install.md).
+* [Tools](tools/) A lot of little scripts and tutorials.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
