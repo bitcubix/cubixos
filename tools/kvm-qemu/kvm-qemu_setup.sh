@@ -1,14 +1,35 @@
 #!/bin/bash
+set -e
 ##################################################################################################################
 # Author	:	Raj Pansuriya
 # Contact   :   rajpansuriya40@gmail.com
 ##################################################################################################################
 #
 #   DO NOT JUST RUN THIS. EXAMINE AND JUDGE. RUN AT YOUR OWN RISK.
-#
+
 ##################################################################################################################
 
-
+# Checking virtualization settings
+tput setaf 3
+echo
+echo "###### Checking virtulization settings of your machine ######"
+echo
+tput sgr0
+virtualization=$(egrep -o '(vmx|svm)' /proc/cpuinfo | sort | uniq)
+if [ "$virtualization" == "" ]
+then
+    tput setaf 1
+    echo    
+    echo "Virtualization is disbaled.
+Please check your BIOS settings and enable it."
+    tput sgr0
+    exit
+else
+    tput setaf 2
+    echo "Virtualization is enabled. proceeding with the script!"
+    echo
+    tput sgr0
+fi
 
 # Installing kvm,qemu,virt-manager and other necessary packages
 tput setaf 4
@@ -49,8 +70,14 @@ echo "##### Service is enabled ####"
 echo
 tput sgr0
 
-
-echo -e "options kvm-intel nested=1" | sudo tee -a /etc/modprobe.d/kvm-intel.conf
+# Settings for nested virtualization
+# Variable to store supported virtualization by user's machine
+if [ "virtualization" == "vmx" ]
+then
+    echo -e "options kvm-intel nested=1" | sudo tee -a /etc/modprobe.d/kvm-intel.conf
+else
+    echo -e "options kvm-amd nested=1" | sudo tee -a /etc/modprobe.d/kvm-amd.conf
+fi
 
 ##Change your username here
 tput setaf 3
