@@ -1,6 +1,6 @@
 # Git
 
-This folder contains script for setup and using `Git`.
+This folder contains a script for setup and using `Git`.
 
 ## Git Doccumentation and useful sites
 
