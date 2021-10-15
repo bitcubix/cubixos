@@ -50,7 +50,7 @@
 <!-- about the project -->
 ## About The Project
 
-This Project is meant to be a collection of useful script and tutorial around archlinux (and in general linux). Its conetent is created by side over time using linux every day.
+This Project is meant to be a collection of useful scripts and tutorials around archlinux (and in general linux). Its content is created by side over time using linux every day.
 
 <!-- parts -->
 ### Parts
@@ -63,7 +63,7 @@ This Project is meant to be a collection of useful script and tutorial around ar
 <!-- getting started -->
 ## Getting Started
 
-The project contains folder, for example [base_install](base_install/) in each folder or subfolder are diffrent tools (scripts, configs) sometimes together with a tutorial over the tool. For a description of the part look at the `README.md` in the folder.
+The project contains folders, for example [base_install](base_install/) in each folder or subfolder are different tools (scripts, configs) sometimes together with a tutorial about the tool. For a description of the part look at the `README.md` in the folder.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

@@ -1,12 +1,12 @@
 # Encryption Scripts
 
-This folder contains script to encrypt partitions or devices.
+This folder contains a script to encrypt partitions.
 
 ## Scripts
 
 ### [Partition Encryption](partition_encryption.sh)
 
-You can use this script to encrypt your partitions. The partition will be encrypted in this way:
-- NULL override using `dd`
-- encrypt partition using `cryptsetup` with `luks`
-- create `ext4` filesystem
+You can use this script to encrypt your partitions. For example u can use it to encrypt a partition on a usb device. The partition will be encrypted in this way:
+- Random override using `dd`
+- Encrypt partition using `cryptsetup` with `luks`
+- Create `ext4` filesystem
