@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 ##################################################################################################################
 # Author	:	Raj Pansuriya
 # Contact   :   rajpansuriya40@gmail.com
@@ -46,6 +45,10 @@ echo
 # sudo pacman -S --noconfirm --needed iptables
 
 sudo pacman -Rdd iptables --noconfirm
+
+# If script encounters any error, further execution will be stopped
+set -e
+
 sudo pacman -S --noconfirm --needed iptables-nft
 
 sudo pacman -S --noconfirm --needed qemu libvirt bridge-utils virt-viewer spice-vdagent virt-manager xf86-video-qxl vde2 dnsmasq dmidecode
