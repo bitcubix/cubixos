@@ -16,7 +16,7 @@ git clone https://github.com/bitcubix/arch
 
 To run the script:
 ```bash
-cd arch
+cd arch/base_install/
 bash base_install.sh
 ```
 
