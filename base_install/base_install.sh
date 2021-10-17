@@ -58,7 +58,7 @@ cryptsetup -y -v luksFormat $base_device"2"
 
 # open encrypted root partion to dev mapper
 echo "open root partition"
-cryptsetup open /dev/sda2 cryptroot $base_device"2"
+cryptsetup open $base_device"2" cryptroot
 
 # create filesystem entry for boot/root partition
 echo "create filesystems"
