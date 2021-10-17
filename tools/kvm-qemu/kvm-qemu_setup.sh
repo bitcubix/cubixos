@@ -1,11 +1,15 @@
 #!/bin/bash
+#
 ##################################################################################################################
+# Written to be used on 64 bits computers
+# Both Intel and AMD CPUs are fine to run the script.   (No ARM or any other CPUs)
+#
 # Author	:	Raj Pansuriya
 # Contact   :   rajpansuriya40@gmail.com
 ##################################################################################################################
 #
 #   DO NOT JUST RUN THIS. EXAMINE AND JUDGE. RUN AT YOUR OWN RISK.
-
+#
 ##################################################################################################################
 
 # Checking virtualization settings
