@@ -30,3 +30,8 @@
 # vim
 Session.vim
 Sessionx.vim
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
