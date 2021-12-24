@@ -2,7 +2,7 @@
 import logging
 
 
-class Logger():
+class Logger:
     """logger helper utils"""
 
     @staticmethod
