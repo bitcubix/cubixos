@@ -8,15 +8,21 @@ class Logger():
     @staticmethod
     def load(level='DEBUG'):
         """create the logger instance at the start of the programm"""
-        log = logging.getLogger('root')
+        log = logging.getLogger()
         log.setLevel(level)
         log.addHandler(LogHandler())
+        log = LogPrefixAdapter(log, 'root')
+        log = LogExtraAdapter(log)
         return log
 
     @staticmethod
-    def get(area='root'):
+    def get(area=''):
         """load the existing logger instance in sub-modules"""
-        return logging.getLogger(area)
+        log = logging.getLogger()
+        if area != '':
+            log = LogPrefixAdapter(log, area)
+        log = LogExtraAdapter(log)
+        return log
 
 
 class LogHandler(logging.StreamHandler):
@@ -30,18 +36,47 @@ class LogHandler(logging.StreamHandler):
     bold_red = "\x1b[31;1m"
     reset = "\x1b[0m"
 
-    fmt = '%(levelname)-8s \x1b[0m %(asctime)s - %(filename)-12s: %(message)s'
-    fmt_date = '%Y-%m-%d %H:%M:%S,uu'
+    fmt = '%(asctime)s.%(msecs)03d %(message)s'
+    fmt_date = '%H:%M:%S'
 
     FORMATS = {
-        logging.DEBUG: blue + fmt,
-        logging.INFO: green + fmt,
-        logging.WARNING: yellow + fmt,
-        logging.ERROR: red + fmt,
-        logging.CRITICAL: bold_red + fmt
+        logging.DEBUG: blue,
+        logging.INFO: green,
+        logging.WARNING: yellow,
+        logging.ERROR: red,
+        logging.CRITICAL: bold_red
     }
 
     def format(self, record):
+        lvl_space = " " * (9 - len(logging.getLevelName(record.levelno)))
         log_fmt = self.FORMATS.get(record.levelno)
-        formatter = logging.Formatter(log_fmt)
+        log_fmt = log_fmt + f"%(levelname)s\x1b[0m{lvl_space} " + self.fmt
+        formatter = logging.Formatter(log_fmt, self.fmt_date)
         return formatter.format(record)
+
+
+class LogPrefixAdapter(logging.LoggerAdapter):
+    """add the module name at start of log message"""
+
+    def __init__(self, logger, prefix):
+        super().__init__(logger, {})
+        self.prefix = prefix
+
+    def process(self, msg, kwargs):
+        space = " " * (6 - len(self.prefix))
+        return f"[{self.prefix}]{space}: {msg}", kwargs
+
+
+class LogExtraAdapter(logging.LoggerAdapter):
+    """add extra arguments at the end of the log message"""
+
+    def __init__(self, logger):
+        super().__init__(logger, {})
+
+    def process(self, msg, kwargs):
+        extras = kwargs["extra"]
+        fmt = "{"
+        for key in extras:
+            fmt = fmt + f"{key}: {extras[key]}, "
+        fmt = fmt[:-2] + "}"
+        return f"{msg} {fmt}", kwargs
