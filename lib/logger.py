@@ -2,17 +2,21 @@
 import logging
 
 
-def load(level):
-    """create the logger instance at the start of the programm"""
-    log = logging.getLogger('root')
-    log.setLevel(level)
-    log.addHandler(LogHandler())
-    return log
+class Logger():
+    """logger helper utils"""
 
+    @staticmethod
+    def load(level='DEBUG'):
+        """create the logger instance at the start of the programm"""
+        log = logging.getLogger('root')
+        log.setLevel(level)
+        log.addHandler(LogHandler())
+        return log
 
-def get():
-    """load the existing logger instance in sub-modules"""
-    return logging.getLogger('root')
+    @staticmethod
+    def get(area='root'):
+        """load the existing logger instance in sub-modules"""
+        return logging.getLogger(area)
 
 
 class LogHandler(logging.StreamHandler):
