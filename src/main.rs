@@ -1,3 +1,7 @@
+pub mod disk;
+
+mod cli;
+
 fn main() {
-    println!("cubixos");
+    cli::run();
 }
