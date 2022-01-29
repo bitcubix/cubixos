@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 clap = { version = "3.0.13", features = ["cargo"] }
 block-utils = "0.10.4"
+term-table = "1.3.2"
